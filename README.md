@@ -15,5 +15,7 @@ or, track a pageview:
 	
 	ga.addPageView("mainPage/", "Main Page");
 
+Honestly, the only classes you need here are com.mrballistic.utils.GA and com.facebook.utils.GUID
+
 Easy!
 
