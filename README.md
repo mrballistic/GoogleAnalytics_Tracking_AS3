@@ -5,13 +5,15 @@ This class abstracts the various hassles around pushing data from a desktop air 
 
 Simply instantiate a new GA object and pass in both your google analytics id and site (even though it's a desktop app, google still requires a website be attached to the account). Like this:
 
-    ga = new GA(GA_ID, GA_SITE_CONTEXT);
+	ga = new GA(GA_ID, GA_SITE_CONTEXT);
 
 Then, whenever you want to add an event, do this:
-    ga.addEvent("click", "user_interaction", "click_story", "mainPage/", "Main Page");
+	
+	ga.addEvent("click", "user_interaction", "click_story", "mainPage/", "Main Page");
 
 or, track a pageview:
-    ga.addPageView("mainPage/", "Main Page");
+	
+	ga.addPageView("mainPage/", "Main Page");
 
 Easy!
 
