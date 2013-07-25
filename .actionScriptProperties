@@ -38,6 +38,9 @@
     <application path="GATracking.as">
       <airExcludes/>
     </application>
+    <application path="TrackingTest.as">
+      <airExcludes/>
+    </application>
   </applications>
   <modules/>
   <workers/>

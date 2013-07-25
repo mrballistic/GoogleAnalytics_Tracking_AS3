@@ -8,11 +8,13 @@ package com.mrballistic.utils
 	
 	import flash.events.Event;
 	import flash.events.HTTPStatusEvent;
+	import flash.globalization.LocaleID;
 	import flash.net.URLLoader;
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
+	import flash.system.Capabilities;
 	
 	public class GA extends Object
 	{
@@ -24,6 +26,7 @@ package com.mrballistic.utils
 		private var url:String = "";
 		private var campaign_name:String = "";
 		private var debug_app:Boolean = false;
+		private var local_language:String = "";
 		
 		private var urlVars:URLVariables;
 		
@@ -41,6 +44,8 @@ package com.mrballistic.utils
 			}
 
 			url = GA_URL_SSL;
+
+			local_language = generateLocalLanguage();
 			
 			urlVars = new URLVariables();
 
@@ -181,12 +186,40 @@ package com.mrballistic.utils
 			// set the urlvars we'll send to ga. many are boilerplate.
 			urlVars['v'] = '1';
 			urlVars['tid'] = ga_id;
-			urlVars['cid'] = user_id; 		
-			urlVars['ul'] = "en-us";
+			urlVars['cid'] = user_id; 	
+			urlVars['ul'] = local_language;
 
 			if(campaign_name != ""){
 				urlVars['cn'] = campaign_name;
 			}
+		}
+		
+		private function generateLocalLanguage():String {
+			// oddly enough, Capabilities.languages[0] returns "en", not "en-us" as documented.
+			// this function fixes that, and falls back to whatever Capabilities.languages[0] 
+			// if it comes back in language-locale format as it's supposed to.
+			var _local_language:String = "";
+			var locID:LocaleID = new LocaleID(Capabilities.languages[0] as String);
+			var lang:String = Capabilities.languages[0];
+			var langSplit:Array = lang.split("-");
+			
+			if(langSplit.length > 1){
+				_local_language = lang;
+			} else {
+				_local_language = Capabilities.languages[0] + '-' + locID.getRegion();
+			}
+			
+			// after all of that, let's be certain that we're looking at an xx-xx format
+			// if not, then let's set it to (none), as per RFC 3066
+			if(_local_language.length < 3) {
+				_local_language = "(none)";
+			}
+			
+			// per the rfc, let's make certain that this is all lower-case
+			_local_language = _local_language.toLowerCase();
+		
+			return(_local_language);
+			
 		}
 		
 		private function sendData():void {
