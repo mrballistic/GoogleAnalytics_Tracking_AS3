@@ -197,7 +197,7 @@ package com.mrballistic.utils
 		private function generateLocalLanguage():String {
 			// oddly enough, Capabilities.languages[0] returns "en", not "en-us" as documented.
 			// this function fixes that, and falls back to whatever Capabilities.languages[0] 
-			// if it comes back in language-locale format as it's supposed to.
+			// returns if it comes back in the language-locale format it's supposed to.
 			var _local_language:String = "";
 			var locID:LocaleID = new LocaleID(Capabilities.languages[0] as String);
 			var lang:String = Capabilities.languages[0];
@@ -216,6 +216,7 @@ package com.mrballistic.utils
 			}
 			
 			// per the rfc, let's make certain that this is all lower-case
+			// (actually, the rfc says that it should be case agnostic, but...)
 			_local_language = _local_language.toLowerCase();
 			
 			return(_local_language);
