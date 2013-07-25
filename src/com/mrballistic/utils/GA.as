@@ -217,9 +217,8 @@ package com.mrballistic.utils
 			
 			// per the rfc, let's make certain that this is all lower-case
 			_local_language = _local_language.toLowerCase();
-		
-			return(_local_language);
 			
+			return(_local_language);
 		}
 		
 		private function sendData():void {
