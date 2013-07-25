@@ -127,7 +127,7 @@ package com.mrballistic.utils
 			sendData();
 		}
 		
-		public function addPageView(_pageName, _pageTitle = ""):void {
+		public function addPageView(_pageName:String, _pageTitle:String = ""):void {
 			// add a pageview to ga
 			// pagename is prepended with a leading slash, as per google's rules
 			
@@ -149,7 +149,7 @@ package com.mrballistic.utils
 
 		}
 		
-		public function addEvent(_eventName, _eventCategory, _eventLabel, _pageName, _pageTitle = ""):void {
+		public function addEvent(_eventName:String, _eventCategory:String, _eventLabel:String, _pageName:String, _pageTitle:String = ""):void {
 			// add an event to ga			
 			
 			// reset the urlVars object
